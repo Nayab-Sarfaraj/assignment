@@ -1,7 +1,6 @@
 const { MongoClient, ServerApiVersion } = require("mongodb");
 const { default: mongoose } = require("mongoose");
-const uri = `mongodb+srv://nayabsarfaraj:${process.env.MONGO_PASSWORD}@cluster0.z75tj.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0`;
-
+const uri = `mongodb+srv://${process.env.MONGO_USERNAME}:${process.env.MONGO_PASSWORD}@cluster0.z75tj.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0`;
 
 const connectToDb = async () => {
   try {
