@@ -1,7 +1,7 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
 
-const STATUSES = {
+export const STATUSES = {
   LOADING: "loading",
   ERROR: "error",
   SUCCESS: "success",
@@ -33,10 +33,13 @@ export const blogsSlice = createSlice({
   },
 });
 
-export const fetchBlogs = createAsyncThunk("fetchBlogs", async () => {
+export const fetchBlogs = createAsyncThunk("fetchBlogs", async (page) => {
   try {
-    const { data } = await axios.get("/blogs");
+    console.log(page);
+    if (page <= 0) page = 1;
+    const { data } = await axios.get(`/blogs?page=${page}`);
     return data;
+    // return {};
   } catch (error) {
     console.log(error);
   }

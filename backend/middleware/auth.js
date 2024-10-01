@@ -10,9 +10,9 @@ const isAuthenticated = async (req, res, next) => {
     // fetching the user info and styoring it so that it can be accessed later for authentication password checking etyc
 
     req.user = await User.findById(decodedData.id);
-    // console.log(req.user)
     next();
   } catch (error) {
+  
     return next(new ErrorHandler(error.message, 401));
   }
 };

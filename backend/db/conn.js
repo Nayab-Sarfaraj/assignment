@@ -1,14 +1,17 @@
-const mongoose = require("mongoose");
+const { MongoClient, ServerApiVersion } = require("mongodb");
+const { default: mongoose } = require("mongoose");
+const uri = `mongodb+srv://nayabsarfaraj:${process.env.MONGO_PASSWORD}@cluster0.z75tj.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0`;
 
-const connectToDB = async () => {
+
+const connectToDb = async () => {
   try {
-    await mongoose.connect(
-      // `mongodb+srv://${process.env.ATLAS_username}:${process.env.password}@cluster0.peuugea.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0`
-      'mongodb://127.0.0.1:27017/blog'
-    );
-  } catch (error) {
-    console.log(error);
-    process.exit(1);
+    await mongoose.connect(uri);
+    console.log("successfully connected to the database");
+  } catch (err) {
+    console.log("error while connecting with the database");
+    console.log(err);
+  } finally {
+    console.log("can send the request now");
   }
 };
-module.exports = connectToDB;
+module.exports = connectToDb;

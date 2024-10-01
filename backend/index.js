@@ -2,17 +2,16 @@ require("dotenv").config();
 const express = require("express");
 const cookieParser = require("cookie-parser");
 const app = express();
-const connectToDB = require("./db/conn");
-connectToDB();
+const connectToDb = require("./db/conn");
+connectToDb();
 app.use(express.json());
 app.use(cookieParser());
+app.use(express.urlencoded({ extended: false }));
 const userRouter = require("./routes/userRoutes");
+app.use("/test", (req, res, next) => {});
 app.use("/api/v1", userRouter);
-// app.use("/", (req, res, next) =>
-//   res.json({ success: true, message: "deployed aya" })
-// );
 const blogRouter = require("./routes/blogRoutes");
-app.use("/api/v1",blogRouter)
+app.use("/api/v1", blogRouter);
 const ErrorhandlerMiddleware = require("./middleware/error");
 app.use(ErrorhandlerMiddleware);
 const PORT = process.env.PORT || 5000;
